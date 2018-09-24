@@ -101,7 +101,7 @@ const makeDeleteCheckButtonHTML = (todoList) => {
 
     deleteCheckButton.setAttribute('class', 'todo__delete-button');
     deleteCheckButton.style.fontSize = '18px';
-    deleteCheckButton.innerHTML = 'Delete Checked';
+    deleteCheckButton.innerHTML = 'Remove Task';
 
     deleteCheckButton.addEventListener('click', () => {
         removeCheckedTodos(todoList);
