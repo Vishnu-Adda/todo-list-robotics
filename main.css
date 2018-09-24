@@ -19,25 +19,12 @@ body {
     background: linear-gradient(to left, whitesmoke, whitesmoke) no-repeat bottom center;
     background-size: 0% 3px;
     transition: all 0.25s;
+    /* text-decoration: line-through; */
 }
 
 .header:hover {
-    background-size: 100% 3px;
+    background-size: 100% 4px;
 }
-
-/* .header::after {
-    content: '';
-    display: block;
-    width: 0;
-    height: 4px;
-    background: whitesmoke;
-    transition: width .3s;
-}
-
-.header:hover::after {
-    width: 100%;
-    left: 0;
-} */
 
 /* FORM STYLES */
 

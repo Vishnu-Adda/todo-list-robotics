@@ -12,7 +12,13 @@ class Todo {
         this.checked = false;
     }
     toggleCheck() {
-        this.checked = checked ? false : true;
+        this.checked = this.checked ? false : true;
+    }
+    getCheck() {
+        return this.checked;
+    }
+    get check() {
+        return this.checked;
     }
     get text() {
         return this._text;
