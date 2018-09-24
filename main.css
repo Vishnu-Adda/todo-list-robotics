@@ -14,9 +14,18 @@ body {
 
 .header {
     color: whitesmoke;
+    display: block;
+    padding-bottom: 15px;
+    background: linear-gradient(to left, whitesmoke, whitesmoke) no-repeat bottom center;
+    background-size: 0% 3px;
+    transition: all 0.25s;
 }
 
-.header::after {
+.header:hover {
+    background-size: 100% 3px;
+}
+
+/* .header::after {
     content: '';
     display: block;
     width: 0;
@@ -28,7 +37,7 @@ body {
 .header:hover::after {
     width: 100%;
     left: 0;
-}
+} */
 
 /* FORM STYLES */
 
@@ -160,6 +169,7 @@ input[type='text']:focus,
 button {
     background-color: inherit; 
     border: none;
+    cursor: pointer;
 }
 
 button:focus {
@@ -170,5 +180,15 @@ button:focus {
 @keyframes bounce {
     100% {
         transform: scale(1.1);
+    }
+}
+
+@keyframes border-bottom-spread {
+    0% {
+        border-bottom: whitesmoke;
+        border-bottom-width: 0%;
+    }
+    100% {
+        border-bottom: whitesmoke
     }
 }

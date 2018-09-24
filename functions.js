@@ -1,15 +1,24 @@
 'use strict';
 
-const displayTodo = (todo) => {
-    // document.querySelector('.todo-list-todos').innerHTML = '';
-    document.querySelector('.todo-list-todos').appendChild(makeTodoHTML(todo));
+const displayTodos = (todoList) => {
+    document.querySelector('.todo-list-todos').innerHTML = '';
+    todoList.forEach((listTodo) => {
+        document.querySelector('.todo-list-todos')
+        .appendChild(makeTodoHTML(todoList, listTodo));
+    });
 };
 
-// const removeTodo = (id) => {
-//     todos.splice(index, 1);
-// };
+// Fix up soon
+const removeTodo = (todoList, todo) => {
+    const index = todoList.findIndex((listTodo) => {
+        return listTodo === todo;
+    });
+    todoList.splice(index, 1);
+    displayTodos(todoList);
+    return todoList;
+};
 
-const makeTodoHTML = (todo) => {
+const makeTodoHTML = (todoList, todo) => {
     const todoDiv = document.createElement('div');
     const todoText = document.createElement('div');
     const checkbox = document.createElement('button');
@@ -17,6 +26,7 @@ const makeTodoHTML = (todo) => {
 
     todoDiv.setAttribute('class', 'todo-list-todos__todo');
     todoText.setAttribute('class', 'todo__text');
+    todoText.setAttribute('contenteditable', 'true');
     checkbox.setAttribute('class', 'todo__check-button');
     removeButton.setAttribute('class', 'todo__delete-button');
 
@@ -29,7 +39,7 @@ const makeTodoHTML = (todo) => {
     removeButton.innerHTML = '<ion-icon md="md-close"></ion-icon>';
     todoDiv.appendChild(removeButton);
     removeButton.addEventListener('click', () => {
-
+        removeTodo(todoList, todo);
     });
 
     return todoDiv;
