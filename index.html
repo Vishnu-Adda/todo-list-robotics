@@ -2,13 +2,30 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Page Title</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+    <link href="https://unpkg.com/ionicons@4.4.2/dist/css/ionicons.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
+    <script src="app.js"></script>
 </head>
 <body>
-    
+    <div class="todo-list">
+        <h1 class="header">My Todo List</h1>
+        <form id="make-todo-form">
+            <input type="text" placeholder="Enter a todo">
+            <button class="todo-add-button">Add</button>
+        </form>
+        <div class="todo-list-todos">
+            <div class="todo-list-todos__todo">
+                <div class="todo__text" contenteditable="true"></div>
+                <button class="todo__check-button"><ion-icon md="md-checkmark"></ion-icon></button>
+                <button class="todo__delete-button"><ion-icon md="md-close"></ion-icon></button>
+            </div> 
+        </div>
+    </div>
+    <script src="https://unpkg.com/ionicons@4.4.2/dist/ionicons.js"></script>
+    <script src="./classes.js"></script>
+    <script src="./functions.js"></script>
+    <script src="./app.js"></script>
 </body>
 </html>
