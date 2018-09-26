@@ -21,6 +21,13 @@ const displayTodos = (todoList) => {
             document.querySelector('#make-todo-form').
                 appendChild(makeDeleteCheckButtonHTML(todoList));
         }
+    } else if (todoList.length === 0) {
+
+        $('.todo-add-button').css({
+            "border": "none"
+        });
+
+        document.querySelector('.todo__delete-button').outerHTML = "";
     }
 };
 
@@ -44,7 +51,12 @@ const checkTodo = (todoList, todo) => {
 };
 
 const removeCheckedTodos = (todoList) => {
-    todoList = todoList.filter(listTodo => listTodo.getCheck() !== true);
+    for (let i = 0; i < todoList.length; i++) {
+        if (todoList[i].check === true) {
+            removeTodo(todoList, todoList[i]);
+            i--;
+        }
+    }
     displayTodos(todoList);
     return todoList;
 };
@@ -67,12 +79,19 @@ const makeTodoHTML = (todoList, todo) => {
         todoText.textContent = todo.text;
     }
     todoDiv.appendChild(todoText);
+    todoText.addEventListener('keypress', () => {
+        if (todo.check === true) {
+            todoText.innerHTML = `<del>${todo.text}</del>`;
+        } else {
+            todoText.textContent = todo.text;
+        }
+    });
 
     checkbox.innerHTML = '<ion-icon md="md-checkmark"></ion-icon>';
     todoDiv.appendChild(checkbox);
     checkbox.addEventListener('click', () => {
         todo.toggleCheck();
-        if (todo.getCheck() === true) {
+        if (todo.check === true) {
             todoText.innerHTML = `<del>${todo.text}</del>`;
         } else {
             todoText.textContent = todo.text;

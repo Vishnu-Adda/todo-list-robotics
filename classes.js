@@ -3,22 +3,22 @@
 class Todo {
     constructor(text) {
         this._text = text;
-        this.checked = false;
+        this._checked = false;
     }
     check() {
-        this.checked = true;
+        this._checked = true;
     }
     uncheck() {
-        this.checked = false;
+        this._checked = false;
     }
     toggleCheck() {
-        this.checked = this.checked ? false : true;
+        this._checked = this.checked ? false : true;
     }
     getCheck() {
-        return this.checked;
+        return this._checked;
     }
     get check() {
-        return this.checked;
+        return this._checked;
     }
     get text() {
         return this._text;
