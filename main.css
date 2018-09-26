@@ -79,6 +79,7 @@ input[type='text']:focus,
 }
 
 /* TODO STYLES */
+
 .todo-list-todos {
     display: flex;
     /* border: 1px solid black; */
@@ -97,6 +98,7 @@ input[type='text']:focus,
 
 .todo__text {
     display: flex;
+    flex-wrap: nowrap;
     flex: 3;
     overflow: hidden;
     justify-content: center;
@@ -111,17 +113,46 @@ input[type='text']:focus,
     outline: none;
 }
 
+/* NOT MINE */
+.todo__checkbox {
+    display: flex;
+    flex: 1;
+    border-right: 1px solid #cba3db;
+    
+}
+
+input[type='checkbox'] {
+    display: none;
+    position: absolute;
+}
+
+.todo__checkbox-span {
+    display: flex;
+    flex: 1;
+    font-size: 25px;
+    color: whitesmoke;
+}
+
+/* Need to put important as JS will set a color to an inline style,
+negating hover and active colors */
+.todo__checkbox-span:hover {
+    color: #6dde9d!important;
+}
+
+.todo__checkbox-span:active {
+    color: #219251!important;
+}
+
+.check-icon {
+    margin: 0 auto;
+    margin-top: 5px;
+}
+/* NOT MINE */
+
 .todo__check-button {
     flex: 1;
     border-right: 1px solid #cba3db;
     color: #2ecc71;
-    font-size: 25px;
-    transition: all 0.2s ease-in-out 0s;
-}
-
-.todo__delete-button {
-    flex: 1;
-    color: #e74c3c;
     font-size: 25px;
     transition: all 0.2s ease-in-out 0s;
 }
@@ -137,6 +168,13 @@ input[type='text']:focus,
 .todo__check-button:active {
     transform: translateY(1px);
     box-shadow: 0px 1px #219251;
+}
+
+.todo__delete-button {
+    flex: 1;
+    color: #e74c3c;
+    font-size: 25px;
+    transition: all 0.2s ease-in-out 0s;
 }
 
 .todo__delete-button:hover,
@@ -164,6 +202,7 @@ button:focus {
 }
 
 /* ANIMATIONS */
+
 @keyframes bounce {
     100% {
         transform: scale(1.1);

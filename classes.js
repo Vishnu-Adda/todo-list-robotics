@@ -12,7 +12,7 @@ class Todo {
         this._checked = false;
     }
     toggleCheck() {
-        this._checked = this.checked ? false : true;
+        this._checked = this._checked ? false : true;
     }
     getCheck() {
         return this._checked;

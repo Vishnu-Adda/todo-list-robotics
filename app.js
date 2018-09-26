@@ -3,6 +3,7 @@
 // Bug here, can't do const
 var todos = [];
 
+// Bug here, sometimes this form doesn't exist for some reason
 var el = document.getElementById('make-todo-form');
 if (el !== null) {
     document.querySelector('#make-todo-form').addEventListener('submit', (e) => {

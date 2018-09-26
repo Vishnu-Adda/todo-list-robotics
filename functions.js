@@ -64,13 +64,17 @@ const removeCheckedTodos = (todoList) => {
 const makeTodoHTML = (todoList, todo) => {
     const todoDiv = document.createElement('div');
     const todoText = document.createElement('div');
-    const checkbox = document.createElement('button');
+    const checkbox = document.createElement('div');
+    const checkboxInput = document.createElement('input');
+    const checkboxSpan = document.createElement('span');
     const removeButton = document.createElement('button');
 
     todoDiv.setAttribute('class', 'todo-list-todos__todo');
     todoText.setAttribute('class', 'todo__text');
     todoText.setAttribute('contenteditable', 'true');
-    checkbox.setAttribute('class', 'todo__check-button');
+    checkbox.setAttribute('class', 'todo__checkbox');
+    checkboxInput.setAttribute('type', 'checkbox');
+    checkboxSpan.setAttribute('class', 'todo__checkbox-span');
     removeButton.setAttribute('class', 'todo__delete-button');
 
     if (todo.getCheck() === true) {
@@ -79,22 +83,39 @@ const makeTodoHTML = (todoList, todo) => {
         todoText.textContent = todo.text;
     }
     todoDiv.appendChild(todoText);
-    todoText.addEventListener('keypress', () => {
+    todoText.addEventListener('keypress', (e) => {
         if (todo.check === true) {
+            todo.text = e.target.elements.text.value;
             todoText.innerHTML = `<del>${todo.text}</del>`;
         } else {
+            todo.text = e.target.elements.text.value;
             todoText.textContent = todo.text;
         }
     });
 
-    checkbox.innerHTML = '<ion-icon md="md-checkmark"></ion-icon>';
+    // checkbox.innerHTML = '<ion-icon md="md-checkmark"></ion-icon>';
+    // todoDiv.appendChild(checkbox);
+    // checkbox.addEventListener('click', () => {
+    //     todo.toggleCheck();
+    //     if (todo.check === true) {
+    //         todoText.innerHTML = `<del>${todo.text}</del>`;
+    //     } else {
+    //         todoText.textContent = todo.text;
+    //     }
+    // });
+
+    checkboxSpan.innerHTML = '<ion-icon md="md-checkmark" class="check-icon">';
+    checkbox.appendChild(checkboxInput);
+    checkbox.appendChild(checkboxSpan);
     todoDiv.appendChild(checkbox);
     checkbox.addEventListener('click', () => {
         todo.toggleCheck();
-        if (todo.check === true) {
-            todoText.innerHTML = `<del>${todo.text}</del>`;
+        if (todo.check) {
+            todoText.innerHTML = `<del>${todo.text}</del>`
+            checkboxSpan.style.color = '#2ecc71'
         } else {
             todoText.textContent = todo.text;
+            checkboxSpan.style.color = 'whitesmoke';
         }
     });
 
