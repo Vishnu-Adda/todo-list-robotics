@@ -1,22 +1,19 @@
 'use strict';
 
-// Bug here, can't do const
 var todos = [];
 
-// Bug here, sometimes this form doesn't exist for some reason
+// Chance that this form might not exist
 var el = document.getElementById('make-todo-form');
 if (el !== null) {
     document.querySelector('#make-todo-form').addEventListener('submit', (e) => {
-        // Prevents the refresh
+        // Prevents the refresh and request
         e.preventDefault();
         if(e.target.elements.text.value !== '') {
-            let todo = new Todo(e.target.elements.text.value);
+            const todo = new Todo(e.target.elements.text.value);
             todos.push(todo);
             displayTodos(todos);
-            // todos.forEach((listTodo) => {
-            //     displayTodo(listTodo);
-            // });
-            // displayTodo(todo);
+
+            // Clear the form after submission
             e.target.elements.text.value = '';
         }
     });
