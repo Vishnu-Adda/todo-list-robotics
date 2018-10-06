@@ -1,13 +1,16 @@
 'use strict';
 
+// Display the list of todos every time we add or delete a todo
 const displayTodos = (todoList) => {
-    document.querySelector('.todo-list-todos').innerHTML = '';
+    // Set the html to nothing as we refresh the list
+    $('.todo-list-todos').html('');
     todoList.forEach((listTodo) => {
-        document.querySelector('.todo-list-todos').
-            appendChild(makeTodoHTML(todoList, listTodo));
+        // Append each todo item to the todo list div
+        $('.todo-list-todos').append(makeTodoHTML(todoList, listTodo));
     });
+    // If there are todos, and there is no delete button, then style and add buttons accordingly
     if (todoList.length > 0) {
-        if (!document.querySelector('#make-todo-form > .todo__delete-button')) {
+        if (!$('#make-todo-form > .todo__delete-button').length) {
 
             $('.todo-add-button').css({
                 "border-right-color": "#cba3db",
@@ -15,21 +18,23 @@ const displayTodos = (todoList) => {
                 "border-right-style": "solid"
             });
 
-            document.querySelector('#make-todo-form').
-                appendChild(makeDeleteCheckButtonHTML(todoList));
+            $('#make-todo-form').append(makeDeleteCheckButtonHTML(todoList));
         }
-    } else if (todoList.length === 0) {
+    } 
+    // If there are no todos, then revert add button styles, and remove the deletion button
+    else if (todoList.length === 0) {
 
         $('.todo-add-button').css({
             "border": "none"
         });
 
-        if (document.querySelector('.todo__delete-button')) {
-            document.querySelector('.todo__delete-button').outerHTML = "";
+        if ($('.todo__delete-button')) {
+            $('.todo__delete-button').remove();
         }
     }
 };
 
+// Finds and removes a given todo from the array of todos
 const removeTodo = (todoList, todo) => {
     const index = todoList.findIndex((listTodo) => {
         return listTodo === todo;
@@ -39,19 +44,12 @@ const removeTodo = (todoList, todo) => {
     return todoList;
 };
 
-const checkTodo = (todoList, todo) => {
-    const index = todoList.findIndex((listTodo) => {
-        return listTodo === todo;
-    });
-    todoList[index].toggleCheck();
-    displayTodos(todoList);
-    return todoList;
-};
-
+// Algorithm to remove all checked todos from the array of todos
 const removeCheckedTodos = (todoList) => {
     for (let i = 0; i < todoList.length; i++) {
         if (todoList[i].check === true) {
             removeTodo(todoList, todoList[i]);
+            // Stays on the same index once it removes a todo
             i--;
         }
     }
