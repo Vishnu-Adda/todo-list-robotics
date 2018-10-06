@@ -27,7 +27,9 @@ const displayTodos = (todoList) => {
             "border": "none"
         });
 
-        document.querySelector('.todo__delete-button').outerHTML = "";
+        if (document.querySelector('.todo__delete-button')) {
+            document.querySelector('.todo__delete-button').outerHTML = "";
+        }
     }
 };
 
@@ -66,7 +68,6 @@ const makeTodoHTML = (todoList, todo) => {
     const todoText = document.createElement('div');
     const checkbox = document.createElement('div');
     const checkboxInput = document.createElement('input');
-    const checkboxSpan = document.createElement('span');
     const removeButton = document.createElement('button');
 
     todoDiv.setAttribute('class', 'todo-list-todos__todo');
@@ -74,48 +75,48 @@ const makeTodoHTML = (todoList, todo) => {
     todoText.setAttribute('contenteditable', 'true');
     checkbox.setAttribute('class', 'todo__checkbox');
     checkboxInput.setAttribute('type', 'checkbox');
-    checkboxSpan.setAttribute('class', 'todo__checkbox-span');
     removeButton.setAttribute('class', 'todo__delete-button');
 
-    if (todo.getCheck() === true) {
+    if (todo.check === true) {
+        checkboxInput.checked = true;
+        todoText.setAttribute('contenteditable', 'false');
         todoText.innerHTML = `<del>${todo.text}</del>`;
     } else {
+        checkboxInput.checked = false;
+        todoText.setAttribute('contenteditable', 'true');
         todoText.textContent = todo.text;
     }
     todoDiv.appendChild(todoText);
-    todoText.addEventListener('keypress', (e) => {
+    todoText.addEventListener('keyup', (e) => {
+        todo.text = todoText.textContent;
         if (todo.check === true) {
-            todo.text = e.target.elements.text.value;
             todoText.innerHTML = `<del>${todo.text}</del>`;
-        } else {
-            todo.text = e.target.elements.text.value;
-            todoText.textContent = todo.text;
         }
     });
 
-    // checkbox.innerHTML = '<ion-icon md="md-checkmark"></ion-icon>';
-    // todoDiv.appendChild(checkbox);
-    // checkbox.addEventListener('click', () => {
-    //     todo.toggleCheck();
-    //     if (todo.check === true) {
-    //         todoText.innerHTML = `<del>${todo.text}</del>`;
-    //     } else {
-    //         todoText.textContent = todo.text;
-    //     }
-    // });
-
-    checkboxSpan.innerHTML = '<ion-icon md="md-checkmark" class="check-icon">';
     checkbox.appendChild(checkboxInput);
-    checkbox.appendChild(checkboxSpan);
     todoDiv.appendChild(checkbox);
-    checkbox.addEventListener('click', () => {
+    checkboxInput.addEventListener('change', () => {
+        console.log('shouldn"t happen');
         todo.toggleCheck();
+        // $('input:checked').each(function () {
+        //     let editDiv = $(this).closest('.todo__text');
+        //     if($(this).is(':checked')) {
+        //         console.log(editDiv.html());
+        //         editDiv.attr('contenteditable', 'false');
+        //         editDiv.html(`<del>${editDiv.text()}</del>`);
+        //         // todoText.innerHTML = `<del>${todo.text}</del>`;
+        //     } else {
+        //         editDiv.attr('contenteditable', 'true');
+        //         editDiv.html(`${editDiv.text()}`);
+        //     }
+        // });
         if (todo.check) {
-            todoText.innerHTML = `<del>${todo.text}</del>`
-            checkboxSpan.style.color = '#2ecc71'
+            todoText.setAttribute('contenteditable', 'false');
+            todoText.innerHTML = `<del>${todo.text}</del>`;
         } else {
+            todoText.setAttribute('contenteditable', 'true');
             todoText.textContent = todo.text;
-            checkboxSpan.style.color = 'whitesmoke';
         }
     });
 

@@ -122,8 +122,7 @@ input[type='text']:focus,
 }
 
 input[type='checkbox'] {
-    display: none;
-    position: absolute;
+    margin: 11px auto 0 auto;
 }
 
 .todo__checkbox-span {
